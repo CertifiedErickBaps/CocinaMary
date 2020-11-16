@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import menuImage from "../images/home.jpg";
 import Navbar from "../components/NavBar";
 import Footer from "../components/Footer";
-import Schedule from "../components/Schedule";
 import DateTimePicker from 'react-datetime-picker'
 
 import { Link } from "react-router-dom";
 
-const ScheduleCalendar = () => {
+const ScheduleCalendar = (props) => {
+
+  let carrito = props.location.state.carrito;
+  let total = props.location.state.total;
+  const [value, onChange] = useState(new Date());
+
+  console.log('Calendar', total);
   return (
     <>
       <div className="calendar-main">
@@ -18,8 +23,9 @@ const ScheduleCalendar = () => {
         <Navbar />
         <div className="calendar">
           <div className="calendar-container">
-           {/*  <Schedule /> */}
-           <DateTimePicker/>
+            {/*  <Schedule /> */}
+            <DateTimePicker onChange={onChange}
+              value={value} />
           </div>
 
           <div className="calendar-btn">
@@ -30,7 +36,13 @@ const ScheduleCalendar = () => {
 
             </div>
             <div className="btn-calendar">
-              <Link className="checkout waves-effect waves-light btn-large" to="/info-persona">
+              <Link className="checkout waves-effect waves-light btn-large" to={{
+                pathname: "/info-persona", state: {
+                  carrito:carrito,
+                  total: total,
+                  fecha:value,
+                }
+              }}>
                 Siguente
               </Link>
             </div>

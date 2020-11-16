@@ -10,11 +10,33 @@ import phone from "../images/phone.svg";
 import location from "../images/location.svg";
 import email from "../images/mail.svg";
 import { Link } from "react-router-dom";
+import { firestore } from '../firebase';
 
-const PersonalData = () => {
+import { withRouter } from "react-router";
+
+const PersonalData = (props) => {
+  let carrito = props.location.state.carrito;
+  let total = props.location.state.total;
+  let fecha = props.location.state.fecha;
+
+
   const { register, handleSubmit, watch, errors } = useForm();
-  const onSubmit = data => console.log(data);
-  console.log(watch("example"));
+  const onSubmit = data => {
+    let info = {
+      carrito: carrito,
+      total: total,
+      fecha: fecha,
+      contacto: data
+    }
+
+    firestore.collection('ordenes').add(info).then(
+      props.history.push({ pathname: '/agregado', state: { data: info } })
+
+    ).catch((e) => {
+      console.log(e);
+    })
+  };
+
   return (
     <>
       <div className="data-main">
@@ -26,7 +48,7 @@ const PersonalData = () => {
           <Navbar />
           <div className="data-price">
             <div className="container-price">
-              <span>$1200.00</span>
+              <span>$ {total} </span>
               <span>MXN</span>
             </div>
           </div>
@@ -39,36 +61,36 @@ const PersonalData = () => {
                 <div className="data-inputs">
                   <div className="entry">
                     <img className="prefix" src={creditcard} alt="" />
-                    <input placeholder="Credit Card" name="creditcard" ref={register({ required: true })} />
-                    {errors.creditcard && <span>Credit Card is required</span>}
+                    <input placeholder="Tarjeta de crédito" name="creditcard" ref={register({ required: true })} />
+                    {errors.creditcard && <span>Tarjeta de crédito es requerida</span>}
                   </div>
                   <div className="entry">
                     <img className="prefix" src={user} alt="" />
                     <input placeholder="Nombre Completo" name="nombre" ref={register({ required: true })} />
-                    {errors.nombre && <span>Nombre is required</span>}
+                    {errors.nombre && <span>Nombre es requerido</span>}
                   </div>
                   <div className="entry">
                     <img className="prefix" src={email} alt="" />
-                    <input placeholder="Correo electonico" name="email" ref={register({ required: true })} />
-                    {errors.email && <span>Email is required</span>}
+                    <input placeholder="Correo electrónico" name="email" ref={register({ required: true })} />
+                    {errors.email && <span>Email es requerido</span>}
                   </div>
                   <div className="entry">
                     <img className="prefix" src={phone} alt="" />
-                    <input placeholder="Telefono" name="phone" ref={register({ required: true })} />
-                    {errors.phone && <span>Phone is required</span>}
+                    <input placeholder="Teléfono" name="phone" ref={register({ required: true })} />
+                    {errors.phone && <span>Teléfono es requerido</span>}
                   </div>
                   <div className="entry">
                     <img className="prefix" src={location} alt="" />
                     <input placeholder="Ubicación" name="location" ref={register({ required: true })} />
-                    {errors.location && <span>Location is required</span>}
+                    {errors.location && <span>Ubicación es requerida</span>}
                   </div>
                 </div>
                 <div className="contacto-btn-container">
                   <div className="personal-data-btn">
-
+                    <input value="Pagar" className="waves-effect waves-light btn-large" type="submit" />
                     <Link to="/agregado" >
 
-                      <input value="Pagar" className="waves-effect waves-light btn-large" type="submit" />
+
 
                     </Link>
                   </div>
@@ -86,4 +108,4 @@ const PersonalData = () => {
   );
 };
 
-export default PersonalData;
+export default withRouter(PersonalData);

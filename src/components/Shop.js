@@ -25,7 +25,7 @@ class Shop extends React.Component {
     let total = 0;
     carrito.forEach(orden => {
       total += orden.precio;
-      ordenes.push(<Order imagen={orden.imagen} titulo={orden.titulo} precio={orden.precio}/>);
+      ordenes.push(<Order imagen={orden.imagen} titulo={orden.titulo} precio={orden.precio} />);
     })
     return (
       <>
@@ -52,7 +52,12 @@ class Shop extends React.Component {
                 </div>
               </div>
               <div className="checkout-container">
-                <Link className="checkout waves-effect waves-light btn-large" to="/calendario">
+                <Link className="checkout waves-effect waves-light btn-large" to={{
+                  pathname: "/calendario", state: {
+                    carrito: carrito,
+                    total: total,
+                  }
+                }}>
                   Checkout
                 </Link>
 
@@ -72,7 +77,7 @@ class Shop extends React.Component {
 };
 
 class Order extends React.Component {
-  
+
   render() {
     let imagen = this.props.imagen;
     let precio = this.props.precio;
@@ -87,14 +92,14 @@ class Order extends React.Component {
             <div className="title-order">
               <span>{titulo}</span>
             </div>
-           
+
           </div>
           <div className="second">
             <div className="price">
-              <span>${precio }MXN</span>
+              <span>${precio}MXN</span>
             </div>
             <div className="piezas">
-              
+
             </div>
           </div>
         </div>

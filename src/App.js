@@ -11,19 +11,10 @@ import OrderSended from "./pages/OrderSended";
 function App() {
   return (
     <>
-      <Route exact path="/agregado">
-        <OrderSended />
-      </Route>
-      <Route exact path="/info-persona">
-        <PersonalData />
-      </Route>
-      <Route exact path="/calendario">
-        <ScheduleCalendar />
-      </Route>
-      <Route exact path="/shop" render={routeProps => (
-        <Shop {...routeProps} />
-      )} >
-      </Route>
+      <Route exact path="/agregado" render={routeProps => (<OrderSended {...routeProps} />)} />
+      <Route exact path="/info-persona" render={routeProps => (<PersonalData {...routeProps} />)} />
+      <Route exact path="/calendario" render={routeProps => (<ScheduleCalendar {...routeProps} />)} />
+      <Route exact path="/shop" render={routeProps => (<Shop {...routeProps} />)} />
       <Route exact path="/">
         <Home />
       </Route>
