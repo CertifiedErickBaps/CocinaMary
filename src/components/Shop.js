@@ -9,14 +9,12 @@ import trash from "../images/trash.svg";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
-import { Link } from "react-router-dom";
+import {Link} from "react-router-dom";
 import OrderSended from '../pages/OrderSended';
 
 
 class Shop extends React.Component {
-  state = {
-
-  }
+  state = {};
 
 
   render() {
@@ -25,17 +23,17 @@ class Shop extends React.Component {
     let total = 0;
     carrito.forEach(orden => {
       total += orden.precio;
-      ordenes.push(<Order imagen={orden.imagen} titulo={orden.titulo} precio={orden.precio} />);
-    })
+      ordenes.push(<Order imagen={orden.imagen} titulo={orden.titulo} precio={orden.precio}/>);
+    });
     return (
       <>
         <div className="shop-main">
           <div className="background-image">
-            <img src={shopBackground} alt="background" />
+            <img src={shopBackground} alt="background"/>
           </div>
-          <div className="opacity" />
+          <div className="opacity"/>
           <div className="shop">
-            <NavBar />
+            <NavBar/>
             <div className="container-menu">
               <div className="title-shop">
                 <span>
@@ -43,7 +41,9 @@ class Shop extends React.Component {
                 </span>
               </div>
               <div className="container-white">
-                {ordenes}
+                <div className="container-total-order">
+                  {ordenes}
+                </div>
               </div>
               <div className="container-price">
                 <div className="total">
@@ -70,7 +70,7 @@ class Shop extends React.Component {
             </div>
           </div>
         </div>
-        <Footer />
+        <Footer/>
       </>
     );
   }
@@ -82,32 +82,34 @@ class Order extends React.Component {
     let imagen = this.props.imagen;
     let precio = this.props.precio;
     let titulo = this.props.titulo;
-    return <div className="container-order">
-      <div className="order-container">
-        <div className="image-order">
-          <img src={imagen} alt="order" />
-        </div>
-        <div className="info-order">
-          <div className="first">
-            <div className="title-order">
-              <span>{titulo}</span>
-            </div>
-
+    return (
+      <div className="container-order">
+        <div className="order-container">
+          <div className="image-order">
+            <img src={imagen} alt="order"/>
           </div>
-          <div className="second">
-            <div className="price">
-              <span>${precio}MXN</span>
-            </div>
-            <div className="piezas">
+          <div className="info-order">
+            <div className="first">
+              <div className="title-order">
+                <span>{titulo}</span>
+              </div>
 
             </div>
+            <div className="second">
+              <div className="price">
+                <span>${precio}MXN</span>
+              </div>
+              <div className="piezas">
+
+              </div>
+            </div>
           </div>
-        </div>
-        {/* <div className="trash">
+          {/* <div className="trash">
           <img src={trash} alt="" />
         </div> */}
+        </div>
       </div>
-    </div>
+    );
   }
 }
 

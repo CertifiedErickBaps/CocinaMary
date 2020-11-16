@@ -536,7 +536,7 @@ footer {
 //Section Shop
 .shop-main {
   position: relative;
-  height: 1000px;
+  height: auto;
   width: 100%;
 
   .opacity {
@@ -589,105 +589,109 @@ footer {
         padding: 2rem 4rem;
         height: auto;
 
-        .container-order {
-          border-radius: 20px;
-          padding: 4rem;
+        .container-total-order {
           background-color: white;
+          border-radius: 20px;
 
-          .order-container {
-            height: 100%;
-            padding: 0 2rem;
-            display: flex;
-            flex-direction: row;
-            justify-content: space-around;
+          .container-order {
+            padding: 4rem;
 
-            .image-order {
-              width: 300px;
-
-              img {
-                width: 100%;
-              }
-            }
-
-            .info-order {
+            .order-container {
+              height: 100%;
+              padding: 0 2rem;
               display: flex;
-              flex-direction: column;
+              flex-direction: row;
               justify-content: space-around;
 
-              .first {
+              .image-order {
+                width: 300px;
+
+                img {
+                  width: 100%;
+                }
+              }
+
+              .info-order {
                 display: flex;
-                flex-direction: row;
+                flex-direction: column;
                 justify-content: space-around;
 
-                .title-order {
-                  padding-right: 2rem;
-
-                  span {
-                    font-family: Source Sans Pro, serif;
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 30px;
-                  }
-                }
-
-                .icons-order {
+                .first {
                   display: flex;
                   flex-direction: row;
+                  justify-content: space-around;
 
-                  .less {
+                  .title-order {
                     padding-right: 2rem;
 
-                    img {
-                      width: 100%;
+                    span {
+                      font-family: Source Sans Pro, serif;
+                      font-style: normal;
+                      font-weight: 600;
+                      font-size: 30px;
                     }
                   }
 
-                  .plus {
-                    img {
-                      width: 100%;
+                  .icons-order {
+                    display: flex;
+                    flex-direction: row;
+
+                    .less {
+                      padding-right: 2rem;
+
+                      img {
+                        width: 100%;
+                      }
+                    }
+
+                    .plus {
+                      img {
+                        width: 100%;
+                      }
+                    }
+                  }
+                }
+
+                .second {
+                  display: flex;
+                  flex-direction: row;
+                  justify-content: space-around;
+
+                  .price {
+                    padding-right: 2rem;
+
+                    span {
+                      font-family: Source Sans Pro, serif;
+                      font-style: normal;
+                      font-weight: 600;
+                      font-size: 30px;
+                    }
+                  }
+
+                  .piezas {
+                    span {
+                      font-family: Source Sans Pro, serif;
+                      font-style: normal;
+                      font-weight: 600;
+                      font-size: 30px;
                     }
                   }
                 }
               }
 
-              .second {
+              .trash {
                 display: flex;
-                flex-direction: row;
-                justify-content: space-around;
+                align-items: center;
+                padding: 1rem;
 
-                .price {
-                  padding-right: 2rem;
-
-                  span {
-                    font-family: Source Sans Pro, serif;
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 30px;
-                  }
+                img {
+                  width: 100%;
                 }
-
-                .piezas {
-                  span {
-                    font-family: Source Sans Pro, serif;
-                    font-style: normal;
-                    font-weight: 600;
-                    font-size: 30px;
-                  }
-                }
-              }
-            }
-
-            .trash {
-              display: flex;
-              align-items: center;
-              padding: 1rem;
-
-              img {
-                width: 100%;
               }
             }
           }
         }
+
       }
 
       .container-price {
@@ -1020,6 +1024,7 @@ footer {
       top: 7rem;
       left: 35rem;
       background-color: white;
+
       .schedule {
         background-color: white;
         width: 900px;
@@ -1030,7 +1035,7 @@ footer {
     .calendar-btn {
       display: flex;
       justify-content: center;
-      position:absolute;
+      position: absolute;
       bottom: 10rem;
       left: 30rem;
 
