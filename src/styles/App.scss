@@ -1011,11 +1011,15 @@ footer {
     justify-content: center;
     flex-direction: column;
     padding: 2rem 0;
+    height: 700px;
 
     .calendar-container {
       display: flex;
       justify-content: center;
-
+      position: absolute;
+      top: 7rem;
+      left: 35rem;
+      background-color: white;
       .schedule {
         background-color: white;
         width: 900px;
@@ -1026,6 +1030,9 @@ footer {
     .calendar-btn {
       display: flex;
       justify-content: center;
+      position:absolute;
+      bottom: 10rem;
+      left: 30rem;
 
       .btn-calendar {
         padding: 2rem;

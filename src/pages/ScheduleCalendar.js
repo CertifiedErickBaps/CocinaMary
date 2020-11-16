@@ -19,7 +19,7 @@ const ScheduleCalendar = () => {
         <div className="calendar">
           <div className="calendar-container">
            {/*  <Schedule /> */}
-           <DateTimePicker></DateTimePicker>
+           <DateTimePicker/>
           </div>
 
           <div className="calendar-btn">

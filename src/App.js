@@ -8,8 +8,6 @@ import PersonalData from "./pages/PersonalData";
 import ScheduleCalendar from "./pages/ScheduleCalendar";
 import OrderSended from "./pages/OrderSended";
 
-
-
 function App() {
   return (
     <>
