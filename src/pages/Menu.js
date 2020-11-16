@@ -19,24 +19,39 @@ const settings = {
   centerMode: true,
 };
 
-const itemFood = (titulo, imagen, precio) => {
-  return (
-    <>
-      <div style={{ width: 300 }} className="container-item">
-        <div className="food-opacity" />
-        <div className="food">
-          <img src={imagen} alt="Food" />
-        </div>
+class ItemFood extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
 
-        <div className="information-item">
-          <span>$ {precio} MXN </span>
-          <img className="rate" src={iconRate} alt="Rate" />
-          <span>{titulo}</span>
-          <a className="waves-effect waves-light btn">Agregar a carrito</a>
+    }
+  }
+
+
+  render() {
+
+    let imagen = this.props.imagen;
+    let precio = this.props.precio;
+    let titulo = this.props.titulo;
+
+    return (
+      <>
+        <div style={{ width: 300 }} className="container-item">
+          <div className="food-opacity" />
+          <div className="food">
+            <img src={imagen} alt="Food" />
+          </div>
+
+          <div className="information-item">
+            <span>$ {precio} MXN </span>
+            <img className="rate" src={iconRate} alt="Rate" />
+            <span>{titulo}</span>
+            <button onClick={() => this.props.handleCarrito( { titulo: titulo, precio: precio, imagen: imagen })} className="waves-effect waves-light btn">Agregar a carrito</button>
+          </div>
         </div>
-      </div>
-    </>
-  )
+      </>
+    )
+  }
 };
 
 class Menu extends React.Component {
@@ -44,13 +59,12 @@ class Menu extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      
+
     }
   }
   async componentDidMount() {
     await firestore.collection('paquetes').get().then(snapshot => {
       this.setState({ snapshot });
-      console.log('didmount',snapshot);
     });
   }
 
@@ -59,14 +73,12 @@ class Menu extends React.Component {
 
   render() {
     let { snapshot } = this.state
-    console.log('render',snapshot);
 
-    const itemsComidita = []; 
-    if(snapshot){
+    const itemsComidita = [];
+    if (snapshot) {
       snapshot.forEach(doc => {
         let info = doc.data();
-        console.log(info);
-        itemsComidita.push(itemFood(info.titulo, info.imagen, info.precio)) ;
+        itemsComidita.push(<ItemFood titulo={info.titulo} precio={info.precio} imagen={info.imagen} handleCarrito={this.props.handleCarrito} />);
       })
       return (<>
         <div className="menu" id="menu">
@@ -77,16 +89,11 @@ class Menu extends React.Component {
             <span>Nuestra especialidad a tu paladar</span>
           </div>
           <div className="container-menu">
-            <div className="title-item">
-              <span className="">Desayuno</span>
-              <span className="">Comida</span>
-              <span className="">Cena</span>
-              <span className="">Postres</span>
-            </div>
+
             <div className="item">
               <Slider {...settings}>
-              {itemsComidita}
-  
+                {itemsComidita}
+
               </Slider>
             </div>
           </div>
@@ -99,13 +106,13 @@ class Menu extends React.Component {
           <div className="phrase-menu">
             <span>Cargando...</span>
           </div>
-          
+
         </div>
       </>)
-      
-      
+
+
     }
-    
+
 
   };
 };
