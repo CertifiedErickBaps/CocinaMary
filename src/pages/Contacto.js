@@ -5,7 +5,7 @@ import map from "../images/map.png";
 const Contacto = () => {
   const {register, handleSubmit, watch, errors} = useForm();
   const onSubmit = data => console.log(data);
-  console.log(watch("example"));
+  // console.log(watch("example"));
 
   return (
     <>

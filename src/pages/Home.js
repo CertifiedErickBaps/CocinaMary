@@ -1,9 +1,9 @@
 import React from 'react';
 import NavBar from "../components/NavBar";
-import { NavHashLink } from 'react-router-hash-link';
+import {NavHashLink} from 'react-router-hash-link';
 import '../styles/App.scss';
 import menuImage from "../images/home.jpg";
-
+import SweetAlert from "sweetalert";
 //Icons
 import facebook from "../images/facebook.svg";
 import instagram from "../images/instagram.svg";
@@ -19,24 +19,24 @@ class Home extends React.Component {
       carrito: []
     }
   }
-  
+
   handleCarrito = (objeto) => {
-    this.setState(previousState =>({
-      carrito: [...previousState.carrito, objeto]
-    })
-      
-    )
-  }
-  
+    this.setState(previousState => ({
+        carrito: [...previousState.carrito, objeto],
+        show: true
+      })
+    );
+  };
+
   render() {
-    console.log('Carrito', this.state.carrito);
+    // console.log('Carrito', this.state.carrito);
     return (
       <>
         <div className="main">
           <div className="background-image">
-            <img src={menuImage} alt="background" />
+            <img src={menuImage} alt="background"/>
           </div>
-          <div className="opacity" />
+          <div className="opacity"/>
           <div className="home" id="home">
             <NavBar carrito={this.state.carrito}/>
             <div className="container-menu">
@@ -57,28 +57,25 @@ class Home extends React.Component {
                 <div className="redes-sociales">
                   <div className="facebook">
                     <span>262k</span>
-                    <img src={facebook} alt="Facebook" />
+                    <img src={facebook} alt="Facebook"/>
                   </div>
                   <div className="instagram">
                     <span>16k</span>
-                    <img src={instagram} alt="Instagram" />
+                    <img src={instagram} alt="Instagram"/>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <Acerca />
+        <Acerca/>
         <Menu handleCarrito={this.handleCarrito}/>
-        <Contacto />
-        <Footer />
+        <Contacto/>
+        <Footer/>
       </>
     );
   };
 }
-
-
-
 
 
 export default Home;
