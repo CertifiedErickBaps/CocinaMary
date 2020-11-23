@@ -6,7 +6,6 @@ import "slick-carousel/slick/slick-theme.css";
 
 import iconRate from "../images/rate.svg";
 import {firestore} from '../firebase';
-import SweetAlert from "sweetalert";
 
 const settings = {
   dots: true,

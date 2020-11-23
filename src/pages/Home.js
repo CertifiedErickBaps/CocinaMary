@@ -3,7 +3,6 @@ import NavBar from "../components/NavBar";
 import {NavHashLink} from 'react-router-hash-link';
 import '../styles/App.scss';
 import menuImage from "../images/home.jpg";
-import SweetAlert from "sweetalert";
 //Icons
 import facebook from "../images/facebook.svg";
 import instagram from "../images/instagram.svg";
