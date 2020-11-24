@@ -9,18 +9,49 @@ import trash from "../images/trash.svg";
 import NavBar from "./NavBar";
 import Footer from "./Footer";
 
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 import OrderSended from '../pages/OrderSended';
 
 
 class Shop extends React.Component {
-  state = {};
+  constructor(props) {
+    super()
+    var handleAdd = this.handleAdd.bind(this);
+    var handleLess = this.handleLess.bind(this);
+
+  }
+
+  state = {
+    total: 0,
+  }
+
+
+  handleAdd(addValue) {
+    this.setState({ total: this.state.total + addValue })
+  }
+
+  handleLess(lessValue) {
+    this.setState({ total: this.state.total - lessValue })
+  }
+
+  componentDidMount() {
+    let tempTotal = 0;
+    let arrayLocal = Array.from(new Set(this.props.location.state.carrito.map(JSON.stringify))).map(JSON.parse);
+    arrayLocal.forEach(orden => {
+      tempTotal+= orden.precio
+    }
+
+    )
+    this.setState({ total: tempTotal })
+  }
+
 
 
   render() {
     let carrito = this.props.location.state.carrito;
     let ordenes = [];
-    let total = 0;
+    var handleAdd = this.handleAdd;
+    var handleLess = this.handleLess;
 
     let jsonObject = carrito.map(JSON.stringify);
 
@@ -31,22 +62,20 @@ class Shop extends React.Component {
 
     console.log(uniqueArray);
 
-    carrito.forEach(orden => {
-      total += orden.precio;
-    });
+
     uniqueArray.forEach(el => {
-      ordenes.push(<Order imagen={el.imagen} titulo={el.titulo} precio={el.precio}/>);
+      ordenes.push(<Order handleAdd={handleAdd.bind(this)} handleLess={handleLess.bind(this)} imagen={el.imagen} titulo={el.titulo} precio={el.precio} />);
     })
 
     return (
       <>
         <div className="shop-main">
           <div className="background-image">
-            <img src={shopBackground} alt="background"/>
+            <img src={shopBackground} alt="background" />
           </div>
-          <div className="opacity"/>
+          <div className="opacity" />
           <div className="shop">
-            <NavBar/>
+            <NavBar />
             <div className="container-menu">
               <div className="title-shop">
                 <span>
@@ -61,14 +90,14 @@ class Shop extends React.Component {
               <div className="container-price">
                 <div className="total">
                   <span>Total</span>
-                  <span>${total} MXN</span>
+                  <span>${this.state.total} MXN</span>
                 </div>
               </div>
               <div className="checkout-container">
                 <Link className="checkout waves-effect waves-light btn-large" to={{
                   pathname: "/calendario", state: {
                     carrito: carrito,
-                    total: total,
+                    total: this.state.total,
                   }
                 }}>
                   Checkout
@@ -83,7 +112,7 @@ class Shop extends React.Component {
             </div>
           </div>
         </div>
-        <Footer/>
+        <Footer />
       </>
     );
   }
@@ -91,6 +120,7 @@ class Shop extends React.Component {
 
 class Order extends React.Component {
   //Aqui pasa directamente el objeto a eliminar, solo seria eliminar por array o algo
+  state = { piezas: 1, imagen: this.props.imagen, precio: this.props.precio, titulo: this.props.titulo }
   handleDelete(object) {
     console.log(object)
   }
@@ -104,40 +134,55 @@ class Order extends React.Component {
   }
 
   render() {
-    let imagen = this.props.imagen;
-    let precio = this.props.precio;
-    let titulo = this.props.titulo;
+
+    var handleAdd = this.props.handleAdd;
+    var handleLess = this.props.handleLess;
+
+
     return (
       <div className="container-order">
         <div className="order-container">
           <div className="image-order">
-            <img src={imagen} alt="order"/>
+            <img src={this.state.imagen} alt="order" />
           </div>
           <div className="info-order">
             <div className="first">
               <div className="title-order">
-                <span>5 pzas - </span>
-                <span>{titulo}</span>
+                <span>{this.state.piezas} pzas - </span>
+                <span>{this.state.titulo}</span>
               </div>
               <div className="icons-order">
-                <div onClick={() => this.handleLess(this.props)} className="less">
-                  <img src={less} alt=""/>
+                <div onClick={() => {
+                  if (this.state.piezas > 0) {
+                    handleLess(this.state.precio);
+                    this.setState({ piezas: this.state.piezas - 1 })
+                    this.handleLess(this.props)
+                  }
+                
+
+                }} className="less">
+                  <img src={less} alt="" />
                 </div>
-                <div onClick={() => this.handlePlus(this.props)} className="plus">
-                  <img src={plus} alt=""/>
+                <div onClick={() => {
+                  handleAdd(this.state.precio);
+                  this.setState({ piezas: this.state.piezas + 1 })
+                  this.handlePlus(this.props)
+
+                }} className="plus">
+                  <img src={plus} alt="" />
                 </div>
               </div>
             </div>
             <div className="second">
               <div className="price">
-                <span>${precio}MXN</span>
+                <span>${this.state.precio * this.state.piezas}MXN</span>
               </div>
               <div className="piezas">
               </div>
             </div>
           </div>
           <div onClick={() => this.handleDelete(this.props)} className="trash">
-            <img src={trash} alt=""/>
+            <img src={trash} alt="" />
           </div>
         </div>
       </div>

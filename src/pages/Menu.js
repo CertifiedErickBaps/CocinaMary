@@ -87,7 +87,7 @@ class Menu extends React.Component {
       snapshot.forEach(doc => {
         let info = doc.data();
         itemsComidita.push(<ItemFood titulo={info.titulo} precio={info.precio} imagen={info.imagen}
-                                     handleCarrito={this.props.handleCarrito}/>);
+                                     handleCarrito={this.props.handleCarrito} tipo={info.tipo}/>);
       });
       this.setState({itemsComidita});
     });
@@ -95,6 +95,7 @@ class Menu extends React.Component {
 
   render() {
     let {itemsComidita} = this.state;
+    
 
     // let menu;
     // if (sectionClasico) {
