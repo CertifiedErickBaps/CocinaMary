@@ -22,16 +22,21 @@ class Shop extends React.Component {
     let ordenes = [];
     let total = 0;
 
-    let result = new Set();
-    let shop = carrito.filter((current) => {
-      let duplicate = result.has(current.titulo);
-      result.add(current);
-      return !duplicate;
-    });
+    let jsonObject = carrito.map(JSON.stringify);
 
-    shop.forEach(item => {
-      ordenes.push(<Order imagen={item.imagen} titulo={item.titulo} precio={item.precio}/>);
+    console.log(jsonObject);
+
+    let uniqueSet = new Set(jsonObject);
+    let uniqueArray = Array.from(uniqueSet).map(JSON.parse);
+
+    console.log(uniqueArray);
+
+    carrito.forEach(orden => {
+      total += orden.precio;
     });
+    uniqueArray.forEach(el => {
+      ordenes.push(<Order imagen={el.imagen} titulo={el.titulo} precio={el.precio}/>);
+    })
 
     return (
       <>
