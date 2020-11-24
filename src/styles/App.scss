@@ -320,8 +320,11 @@ nav {
 
     .item {
       height: 100%;
-
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
       .container-item {
+        margin: 2rem;
         position: relative;
         width: 300px;
         height: 350px;
@@ -639,13 +642,14 @@ footer {
 
                     .less {
                       padding-right: 2rem;
-
+                      cursor: pointer;
                       img {
                         width: 100%;
                       }
                     }
 
                     .plus {
+                      cursor: pointer;
                       img {
                         width: 100%;
                       }

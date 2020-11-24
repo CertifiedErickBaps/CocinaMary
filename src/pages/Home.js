@@ -15,14 +15,26 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      carrito: []
+      carrito: new Set()
     }
   }
 
   handleCarrito = (objeto) => {
+    /* Aqui empieza la modificacion
+    let tempCarrito = new Set();
+    let pzas = 1;
+    this.state.carrito.forEach(el => {
+      if(this.state.carrito.has(objeto.titulo)) {
+        pzas += 1;
+        tempCarrito.add({titulo: objeto.titulo, precio: objeto.precio, imagen: objeto.imagen, piezas: pzas});
+        objeto = tempCarrito;
+        console.log("Entro");
+      }
+    });
+    */
+
     this.setState(previousState => ({
         carrito: [...previousState.carrito, objeto],
-        show: true
       })
     );
   };

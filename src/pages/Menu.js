@@ -44,7 +44,7 @@ class ItemFood extends React.Component {
             <span>$ {precio} MXN </span>
             <img className="rate" src={iconRate} alt="Rate"/>
             <span>{titulo}</span>
-            <button onClick={() => this.props.handleCarrito({titulo: titulo, precio: precio, imagen: imagen})}
+            <button onClick={() => this.props.handleCarrito({titulo: titulo, precio: precio, imagen: imagen, piezas: 1})}
                     className="waves-effect waves-light btn">Agregar a carrito
             </button>
           </div>
@@ -124,23 +124,17 @@ class Menu extends React.Component {
           </div>
           {(this.state.sectionClasico) && (this.state.sectionTemporada === false) && (this.state.sectionAdicional === false) && (
             <div className="item">
-              <Slider {...settings}>
-                {itemsComidita}
-              </Slider>
+              {itemsComidita}
             </div>
           )}
           {(this.state.sectionTemporada) && (this.state.sectionClasico === false) && (this.state.sectionAdicional === false) && (
             <div className="item">
-              <Slider {...settings}>
-                {itemsComidita}
-              </Slider>
+              {itemsComidita}
             </div>
           )}
-          {(this.state.sectionAdicional) && (this.state.sectionTemporada === false) && (this.state.sectionClasico === false) &&(
+          {(this.state.sectionAdicional) && (this.state.sectionTemporada === false) && (this.state.sectionClasico === false) && (
             <div className="item">
-              <Slider {...settings}>
-                {itemsComidita}
-              </Slider>
+              {itemsComidita}
             </div>
           )}
           {/*<div className="item">*/}

@@ -21,10 +21,18 @@ class Shop extends React.Component {
     let carrito = this.props.location.state.carrito;
     let ordenes = [];
     let total = 0;
-    carrito.forEach(orden => {
-      total += orden.precio;
-      ordenes.push(<Order imagen={orden.imagen} titulo={orden.titulo} precio={orden.precio}/>);
+
+    let result = new Set();
+    let shop = carrito.filter((current) => {
+      let duplicate = result.has(current.titulo);
+      result.add(current);
+      return !duplicate;
     });
+
+    shop.forEach(item => {
+      ordenes.push(<Order imagen={item.imagen} titulo={item.titulo} precio={item.precio}/>);
+    });
+
     return (
       <>
         <div className="shop-main">
@@ -77,6 +85,18 @@ class Shop extends React.Component {
 };
 
 class Order extends React.Component {
+  //Aqui pasa directamente el objeto a eliminar, solo seria eliminar por array o algo
+  handleDelete(object) {
+    console.log(object)
+  }
+
+  handlePlus(object) {
+    console.log(object)
+  }
+
+  handleLess(object) {
+    console.log(object)
+  }
 
   render() {
     let imagen = this.props.imagen;
@@ -91,22 +111,29 @@ class Order extends React.Component {
           <div className="info-order">
             <div className="first">
               <div className="title-order">
+                <span>5 pzas - </span>
                 <span>{titulo}</span>
               </div>
-
+              <div className="icons-order">
+                <div onClick={() => this.handleLess(this.props)} className="less">
+                  <img src={less} alt=""/>
+                </div>
+                <div onClick={() => this.handlePlus(this.props)} className="plus">
+                  <img src={plus} alt=""/>
+                </div>
+              </div>
             </div>
             <div className="second">
               <div className="price">
                 <span>${precio}MXN</span>
               </div>
               <div className="piezas">
-
               </div>
             </div>
           </div>
-          {/* <div className="trash">
-          <img src={trash} alt="" />
-        </div> */}
+          <div onClick={() => this.handleDelete(this.props)} className="trash">
+            <img src={trash} alt=""/>
+          </div>
         </div>
       </div>
     );
