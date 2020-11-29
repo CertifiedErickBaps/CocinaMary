@@ -55,7 +55,8 @@ class Shop extends React.Component {
       sectionTemporada: false,
       sectionAdicional: false,
       carrito: [],
-      total: 0
+      total: 0,
+      isSum: false
     }
   }
 
@@ -88,16 +89,16 @@ class Shop extends React.Component {
 
   handleCarrito = (objeto) => {
     // console.log(objeto.precio);
-    console.log(this.state.total);
+    // console.log(this.state.total);
     const titulo = objeto.titulo;
     let flag = false;
     this.state.carrito.forEach(el => {
-      if(el.titulo === titulo) {
+      if (el.titulo === titulo) {
         flag = true;
         alert("Este paquete ya se encuentra dentro de tu carrito, si quieres modificar la cantidad dirígete a la parte inferior de esta pagina.");
       }
     });
-    if(!flag) {
+    if (!flag) {
       this.setState(previousState => ({
           carrito: [...previousState.carrito, objeto],
           total: this.state.total + objeto.precio
@@ -106,7 +107,42 @@ class Shop extends React.Component {
     }
 
 
+  };
 
+  handleAdd = (addValue) => {
+    this.setState({total: this.state.total + addValue});
+  };
+
+  handleLess = (lessValue) => {
+    this.setState({total: this.state.total - lessValue});
+  };
+
+  handleDelete = (object) => {
+    // console.log(object);
+    let tempCarrito = [];
+    for (let i = 0; i < this.state.carrito.length; i++) {
+      if (!(this.state.carrito[i].titulo === object.titulo)) {
+        tempCarrito.push(this.state.carrito[i]);
+        // console.log("If - carrito", this.state.carrito[i]);
+      } else {
+        this.setState({total: this.state.total - object.precio * object.piezas});
+      }
+    }
+    // console.log("TEMPO", tempCarrito);
+    this.setState({carrito: tempCarrito});
+  };
+
+  handlePrecioPiezas = (object) => {
+    let tempCarrito = [];
+    for (let i = 0; i < this.state.carrito.length; i++) {
+      if (!(this.state.carrito[i].titulo === object.titulo)) {
+        tempCarrito.push(this.state.carrito[i]);
+      } else {
+        tempCarrito.push(object);
+      }
+    }
+    console.log("New Carrito", tempCarrito);
+    this.setState({carrito: tempCarrito});
   };
 
   showSection = (name) => {
@@ -126,29 +162,6 @@ class Shop extends React.Component {
     }
   };
 
-  handleAdd = (addValue) => {
-    this.setState({total: this.state.total + addValue})
-  };
-
-  handleLess = (lessValue) => {
-    this.setState({total: this.state.total - lessValue})
-  };
-
-  handleDelete = (object) => {
-    // console.log(object);
-    let tempCarrito = [];
-    for (let i = 0; i < this.state.carrito.length; i++) {
-      if(!(this.state.carrito[i].titulo === object.titulo)) {
-        tempCarrito.push(this.state.carrito[i]);
-        // console.log("If - carrito", this.state.carrito[i]);
-      } else {
-        this.setState({total: this.state.total - object.precio*object.piezas});
-      }
-    }
-    console.log("TEMPO", tempCarrito);
-    this.setState({carrito: tempCarrito});
-  };
-
   render() {
     let {itemsClasico, itemsTemporada, itemsAdicional, carrito} = this.state;
     let showMenu;
@@ -165,7 +178,7 @@ class Shop extends React.Component {
       showMenu = itemsAdicional;
     }
 
-    console.log("Temporal total", carrito);
+    // console.log("Carro", carrito);
 
     let ordenes = [];
     let jsonObject = carrito.map(JSON.stringify);
@@ -176,7 +189,9 @@ class Shop extends React.Component {
     // console.log(uniqueArray);
 
     uniqueArray.forEach(el => {
-      ordenes.push(<Order handleDelete={this.handleDelete} handleAdd={this.handleAdd} handleLess={this.handleLess} imagen={el.imagen}
+      ordenes.push(<Order handlePrecioPiezas={this.handlePrecioPiezas} handleDelete={this.handleDelete} handleAdd={this.handleAdd}
+                          handleLess={this.handleLess}
+                          imagen={el.imagen}
                           titulo={el.titulo} precio={el.precio}/>);
     });
 
@@ -251,16 +266,36 @@ class Shop extends React.Component {
 }
 
 class Order extends React.Component {
-  //Aqui pasa directamente el objeto a eliminar, solo seria eliminar por array o algo
-  state = {piezas: 1, imagen: this.props.imagen, precio: this.props.precio, titulo: this.props.titulo};
+  constructor(props) {
+    super(props);
+    this.state = {
+      piezas: 1, imagen: this.props.imagen, precio: this.props.precio, titulo: this.props.titulo
+    }
+  }
+
+  handleAddOrder = () => {
+    this.setState({piezas: this.state.piezas + 1});
+    this.props.handleAdd(this.state.precio);
+    console.log((this.state.piezas + 1) * this.state.precio);
+    let tempObject = {piezas:(this.state.piezas + 1), precio: this.state.precio, titulo: this.state.titulo, imagen: this.state.imagen }
+    this.props.handlePrecioPiezas(tempObject);
+  };
+
+  handleLessOrder = () => {
+    if (this.state.piezas > 0) {
+      this.setState({piezas: this.state.piezas - 1});
+      this.props.handleLess(this.state.precio);
+    }
+    let tempObject = {piezas:(this.state.piezas - 1), precio: this.state.precio, titulo: this.state.titulo, imagen: this.state.imagen }
+    this.props.handlePrecioPiezas(tempObject);
+  };
+
+  handleDeleteOrder = () => {
+    this.props.handleDelete(this.state);
+  };
 
   render() {
-
-    var handleAdd = this.props.handleAdd;
-    var handleLess = this.props.handleLess;
-    var handleDelete = this.props.handleDelete;
-
-
+    // console.log(this.state);
     return (
       <div className="container-order">
         <div className="order-container">
@@ -275,19 +310,12 @@ class Order extends React.Component {
               </div>
               <div className="icons-order">
                 <div onClick={() => {
-                  if (this.state.piezas > 0) {
-                    handleLess(this.state.precio);
-                    this.setState({piezas: this.state.piezas - 1})
-                  }
-
-
+                  this.handleLessOrder()
                 }} className="less">
                   <img src={less} alt=""/>
                 </div>
                 <div onClick={() => {
-                  handleAdd(this.state.precio);
-                  this.setState({piezas: this.state.piezas + 1})
-
+                  this.handleAddOrder()
                 }} className="plus">
                   <img src={plus} alt=""/>
                 </div>
@@ -301,7 +329,9 @@ class Order extends React.Component {
               </div>
             </div>
           </div>
-          <div onClick={() => handleDelete(this.state)} className="trash">
+          <div onClick={() => {
+            this.handleDeleteOrder()
+          }} className="trash">
             <img src={trash} alt=""/>
           </div>
         </div>
