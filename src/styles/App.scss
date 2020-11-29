@@ -309,12 +309,14 @@ nav {
       justify-content: space-around;
       padding-bottom: 3rem;
 
-      span {
+      button {
         font-family: Source Sans Pro, serif;
         font-style: normal;
         font-weight: 600;
-        font-size: 30px;
+        font-size: 20px;
         cursor: pointer;
+        color: white;
+        background-color: $primary;
       }
     }
 
@@ -323,20 +325,21 @@ nav {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
+
       .container-item {
         margin: 2rem;
         position: relative;
-        width: 300px;
-        height: 350px;
+        width: 400px;
+        height: 450px;
 
         .food-opacity {
           position: absolute;
           left: 0;
           top: 0;
-          height: 350px;
-          width: 300px;
+          height: 450px;
+          width: 400px;
           background-color: #000000;
-          opacity: 0.3;
+          opacity: 0;
           z-index: -1;
         }
 
@@ -360,15 +363,33 @@ nav {
           flex-direction: column;
           height: 100%;
           align-items: center;
+          justify-content: space-around;
 
-          span {
-            padding: 2rem 0;
+          .titulo {
             font-family: Source Sans Pro, serif;
             font-style: normal;
-            font-weight: bold;
             font-size: 30px;
-            line-height: 60px;
             color: white;
+            text-align: center;
+          }
+
+          .piezas {
+            font-family: Source Sans Pro, serif;
+            font-style: normal;
+            font-size: 30px;
+            color: white;
+          }
+
+          .descripcion {
+            font-family: Source Sans Pro, serif;
+            font-style: normal;
+            font-size: 20px;
+            color: white;
+            text-align: center;
+          }
+
+          span {
+            padding: 1rem 0;
           }
 
           img {
@@ -393,7 +414,6 @@ nav {
 .contacto {
   position: relative;
   height: 100%;
-  padding: 8rem 0;
 
   .title-contacto {
     text-align: center;
@@ -627,6 +647,8 @@ footer {
 
                   .title-order {
                     padding-right: 2rem;
+                    max-width: 400px;
+                    text-align: center;
 
                     span {
                       font-family: Source Sans Pro, serif;
@@ -643,6 +665,7 @@ footer {
                     .less {
                       padding-right: 2rem;
                       cursor: pointer;
+
                       img {
                         width: 100%;
                       }
@@ -650,6 +673,7 @@ footer {
 
                     .plus {
                       cursor: pointer;
+
                       img {
                         width: 100%;
                       }
@@ -787,7 +811,15 @@ footer {
     display: flex;
     flex-direction: column;
     padding: 0 2rem;
-
+    .sucess {
+      font-family: Source Sans Pro, serif;
+      font-style: italic;
+      font-weight: bold;
+      font-size: 30px;
+      color: #09ff0d;
+      text-align: center;
+      padding-top: 2rem;
+    }
     .order-map {
       padding: 2rem 0;
       display: flex;
@@ -872,30 +904,65 @@ footer {
   }
 
   .data {
-    .data-price {
-      padding: 2rem;
-      display: flex;
-      justify-content: center;
 
-      .container-price {
-        background-color: $secondary;
-        border-radius: 20px;
-        padding: 0 2rem;
+    .data-information {
+      padding: 0 2rem;
+
+
+
+      .calendar {
         display: flex;
-        justify-content: space-around;
+        justify-content: center;
+        flex-direction: column;
+        padding: 2rem 0;
 
-        span {
-          padding: 0 2rem;
+        .data-subtitle {
           font-family: Source Sans Pro, serif;
           font-style: normal;
           font-weight: 600;
           font-size: 30px;
+          color: $primary;
+          text-align: center;
+          padding-bottom: 1rem;
+        }
+
+        .calendar-container {
+          display: flex;
+          justify-content: center;
+
+          .react-datetime-picker {
+            background-color: white;
+          }
+
+          .schedule {
+            background-color: white;
+            width: 900px;
+            min-height: 500px;
+          }
+        }
+
+        .calendar-btn {
+          display: flex;
+          justify-content: center;
+          position: absolute;
+          bottom: 10rem;
+          left: 30rem;
+
+          .btn-calendar {
+            padding: 2rem;
+
+            a {
+              font-family: Source Sans Pro, serif;
+              font-style: normal;
+              font-weight: 600;
+              font-size: 24px;
+              background-color: $primary;
+            }
+          }
+
         }
       }
-    }
 
-    .data-information {
-      padding: 0 2rem;
 
       .data-title {
         span {
@@ -942,7 +1009,27 @@ footer {
 
 
           }
+          .data-price {
+            padding: 2rem;
+            display: flex;
+            justify-content: center;
 
+            .container-price {
+              background-color: $secondary;
+              border-radius: 20px;
+              padding: 0 2rem;
+              display: flex;
+              justify-content: space-around;
+
+              span {
+                padding: 0 2rem;
+                font-family: Source Sans Pro, serif;
+                font-style: normal;
+                font-weight: 600;
+                font-size: 30px;
+              }
+            }
+          }
           .contacto-btn-container {
             display: flex;
             flex-direction: column;
@@ -983,79 +1070,37 @@ footer {
   }
 }
 
-//Section ScheduleCalendar
-.calendar-main {
-  position: relative;
-  height: auto;
-  width: 100%;
-
-  .opacity {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    background-color: #000000;
-    opacity: 0.5;
-    z-index: -1;
-  }
-
-  .background-image {
-    position: absolute;
-    left: 0;
-    top: 0;
-    height: 100%;
-    width: 100%;
-    z-index: -2;
-
-    img {
-      height: 100%;
-      width: 100%;
-      object-fit: cover;
-    }
-  }
-
-  .calendar {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    padding: 2rem 0;
-    height: 700px;
-
-    .calendar-container {
-      display: flex;
-      justify-content: center;
-      position: absolute;
-      top: 7rem;
-      left: 35rem;
-      background-color: white;
-
-      .schedule {
-        background-color: white;
-        width: 900px;
-        min-height: 500px;
-      }
-    }
-
-    .calendar-btn {
-      display: flex;
-      justify-content: center;
-      position: absolute;
-      bottom: 10rem;
-      left: 30rem;
-
-      .btn-calendar {
-        padding: 2rem;
-
-        a {
-          font-family: Source Sans Pro, serif;
-          font-style: normal;
-          font-weight: 600;
-          font-size: 24px;
-          background-color: $primary;
-        }
-      }
-
-    }
-  }
-}
+////Section ScheduleCalendar
+//.calendar-main {
+//  position: relative;
+//  height: auto;
+//  width: 100%;
+//
+//  .opacity {
+//    position: absolute;
+//    left: 0;
+//    top: 0;
+//    height: 100%;
+//    width: 100%;
+//    background-color: #000000;
+//    opacity: 0.5;
+//    z-index: -1;
+//  }
+//
+//  .background-image {
+//    position: absolute;
+//    left: 0;
+//    top: 0;
+//    height: 100%;
+//    width: 100%;
+//    z-index: -2;
+//
+//    img {
+//      height: 100%;
+//      width: 100%;
+//      object-fit: cover;
+//    }
+//  }
+//
+//
+//}

@@ -1,14 +1,15 @@
 import React from 'react';
 import {NavHashLink} from 'react-router-hash-link';
 import {Link} from "react-router-dom";
-import logo, { ReactComponent } from "../images/logo.svg";
+import logo, {ReactComponent} from "../images/logo.svg";
 import shop from "../images/shop.svg";
+
 class Navbar extends React.Component {
-  
-  render(){
+
+  render() {
     return (
       <>
-  
+
         <div className="navbar-fixed">
           <div className="opacity-fixed"/>
           <nav>
@@ -17,15 +18,14 @@ class Navbar extends React.Component {
                 <img src={logo} alt="Logo Cocina Mary"/>
                 <ul id="nav-mobile" className="right hide-on-med-and-down">
                   <li><NavHashLink smooth to="/#home" activeStyle={{color: '#ED6229'}}>Inicio</NavHashLink></li>
+                  <li><NavHashLink smooth to="/#slider" activeStyle={{color: '#ED6229'}}>Menu</NavHashLink></li>
                   <li><NavHashLink smooth to="/#acerca" activeStyle={{color: '#ED6229'}}>Acerca de cocina
                     Mary</NavHashLink></li>
-                  <li><NavHashLink smooth to="/#menu" activeStyle={{color: '#ED6229'}}>Menu</NavHashLink></li>
-                  <li><NavHashLink smooth to="/#contacto" activeStyle={{color: '#ED6229'}}>Donde encontrarnos</NavHashLink>
+                  <li><NavHashLink smooth to="/#contacto" activeStyle={{color: '#ED6229'}}>Donde
+                    encontrarnos</NavHashLink>
                   </li>
                   <li>
-                    <Link to={{pathname:"/shop", state: {
-                      carrito: this.props.carrito
-                    }}} >
+                    <Link to={{pathname: "/shop"}}>
                       <img className="shop-icon" src={shop} alt=""/>
                     </Link>
                   </li>

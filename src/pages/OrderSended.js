@@ -17,18 +17,23 @@ const OrderSended = () => {
         <div className="opacity"/>
         <div className="order-sended">
           <Navbar/>
+          <div className="sucess">
+            ¡Listo! Tu orden ha sido agregada.
+          </div>
           <div className="order-map">
             <img src={maps} alt="order map"/>
           </div>
           <div className="order-info1">
           <span>
-            Listo! Tu pedido sera entregado a tu domicilio en la fecha estimada y en un tiempo estimado de 20 minutos
-            antes del horario seleccionado.
+            <p>
+            No te preocupes no se te cobrara nada hasta completar tu pedido.
+            Te llamaremos en un plazo de 24hrs para confirmar tu pedido y pedirte más detalles.
+            </p>
           </span>
           </div>
           <div className="order-info2">
           <span>
-            No te preocupes! Nosotros te llamaremos cuando estemos cerca de tu domicilio
+            En caso de tener más comentarios acerca de tu pedido llámanos al 55-29-60-70-10
           </span>
           </div>
           <div className="order-sended-btn">

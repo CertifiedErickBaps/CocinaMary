@@ -1,0 +1,147 @@
+//font-family: 'Pacifico', cursive;
+$primary: #FF6565;
+$secondary: #FFFFFF;
+$footer: #BC1F1F;
+
+//Section menu
+.slider {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  padding: 0 2rem;
+
+  .phrase-menu {
+    padding-bottom: 3rem;
+    text-align: center;
+
+    span {
+      font-family: Source Sans Pro, serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 30px;
+      line-height: 45px;
+      color: $primary;
+    }
+  }
+
+  .phrase-menu2 {
+    padding-top: 2rem;
+    padding-bottom: 3rem;
+    text-align: center;
+
+    span {
+      font-family: Source Sans Pro, serif;
+      font-style: normal;
+      font-weight: 600;
+      font-size: 60px;
+      line-height: 80px;
+    }
+  }
+
+  .container-menu {
+
+    .title-slider {
+      display: flex;
+      justify-content: space-around;
+      padding-bottom: 3rem;
+
+      span {
+        font-family: Source Sans Pro, serif;
+        font-style: normal;
+        font-weight: 600;
+        font-size: 30px;
+        cursor: pointer;
+      }
+    }
+
+    .slider {
+      height: 100%;
+      .container-slider {
+        margin: 2rem;
+        position: relative;
+        width: 300px;
+        height: 350px;
+
+        .food-opacity {
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 350px;
+          width: 300px;
+          background-color: #000000;
+          opacity: 0.3;
+          z-index: -1;
+        }
+
+        .food {
+          position: absolute;
+          left: 0;
+          top: 0;
+          height: 100%;
+          width: 100%;
+          z-index: -2;
+
+          img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+          }
+        }
+
+        .information-slider {
+          display: flex;
+          flex-direction: column;
+          height: 100%;
+          align-items: center;
+          justify-content: space-around;
+          .titulo {
+            font-family: Source Sans Pro, serif;
+            font-style: normal;
+            font-size: 30px;
+            color: white;
+          }
+          .piezas {
+            font-family: Source Sans Pro, serif;
+            font-style: normal;
+            font-size: 30px;
+            color: white;
+          }
+          .descripcion {
+            font-family: Source Sans Pro, serif;
+            font-style: normal;
+            font-size: 20px;
+            color: white;
+          }
+          span {
+            padding: 1rem 0;
+          }
+
+          img {
+            max-width: 150px;
+            width: 100%;
+          }
+        }
+
+        a {
+          font-family: Source Sans Pro, serif;
+          font-style: normal;
+          font-weight: bold;
+          font-size: 15px;
+          background-color: $primary;
+        }
+      }
+    }
+
+    .btn-menu {
+      text-align: end;
+      padding-right: 2rem;
+      a {
+        background-color: $primary;
+        font-family: Source Sans Pro, serif;
+        font-style: normal;
+        font-weight: bold;
+        font-size: 20px;
+      }
+    }
+  }
+}

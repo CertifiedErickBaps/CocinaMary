@@ -6,38 +6,16 @@ import menuImage from "../images/home.jpg";
 //Icons
 import facebook from "../images/facebook.svg";
 import instagram from "../images/instagram.svg";
-import Acerca from "./Acerca";
-import Menu from "./Menu";
-import Contacto from "./Contacto";
+import Acerca from "../components/Acerca";
+import Contacto from "../components/Contacto";
 import Footer from "../components/Footer";
+import Slider from "../components/Slider";
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      carrito: new Set()
-    }
+    this.state = {}
   }
-
-  handleCarrito = (objeto) => {
-    /* Aqui empieza la modificacion
-    let tempCarrito = new Set();
-    let pzas = 1;
-    this.state.carrito.forEach(el => {
-      if(this.state.carrito.has(objeto.titulo)) {
-        pzas += 1;
-        tempCarrito.add({titulo: objeto.titulo, precio: objeto.precio, imagen: objeto.imagen, piezas: pzas});
-        objeto = tempCarrito;
-        console.log("Entro");
-      }
-    });
-    */
-
-    this.setState(previousState => ({
-        carrito: [...previousState.carrito, objeto],
-      })
-    );
-  };
 
   render() {
     // console.log('Carrito', this.state.carrito);
@@ -62,7 +40,7 @@ class Home extends React.Component {
                     <span>Si, nosotros hacemos eso, que tu comida este lista para cualquier ocasion</span>
                   </div>
                   <div className="title-2"><span>¿Quieres empezar a ordenar?</span></div>
-                  <NavHashLink smooth className="waves-effect waves-light btn-large" to="/#menu"
+                  <NavHashLink smooth className="waves-effect waves-light btn-large" to="/shop"
                   >Ordenar ahora</NavHashLink>
                 </div>
                 <div className="redes-sociales">
@@ -79,8 +57,8 @@ class Home extends React.Component {
             </div>
           </div>
         </div>
+        <Slider/>
         <Acerca/>
-        <Menu handleCarrito={this.handleCarrito}/>
         <Contacto/>
         <Footer/>
       </>
